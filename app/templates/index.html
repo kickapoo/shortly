@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	{% raw %}
+	<div id='app'>
+		<section class="hero is-primary is-fullheight">
+			<div class="hero-body">
+				<div class="container">
+					<div class="columns is-centered">
+						<div class="column">
+							<form v-on:submit.prevent="onSubmit" class="box">
+								<div class="field has-text-centered">
+    								 Shortly - Yet another URL shortener
+  								</div>
+								<div class="field  has-addons">
+									<label class="label"></label>
+									<div class="control is-expanded">
+										<input v-bind:class="{'is-danger': form_errors.length }" class="input" type="text" v-model="raw_lng_url" :placeholder="placeholder">
+									</div>
+									<div class="control" >
+										<a v-bind:class="{'is-danger': form_errors.length }" @click="onSubmit" class="button is-info">
+												Short Me !!!
+										</a>
+									</div>
+								</div>
+								<div v-if="form_errors.length">
+									<p v-for="error in form_errors" class="help is-danger has-text-centered">
+											{{ error }}
+									</p>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="container">
+					<div v-if="srt_url" class="columns is-centered">
+						<div class="column">
+							<div class="box has-text-centered">
+								<div>
+									<p>{{ lng2str_url }}</p>
+								</div>
+								<div class="field  has-addons">
+									<div class="control is-expanded">
+										<input class="input is-size-4" type="text" :value="srt_url" type="text"  id="srt_url_result">
+									</div>
+									<div class="control" >
+										<button class="button is-size-4" @click="copyShortUrl2Clipboard">Copy</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	{% endraw %}
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="{{ url_for('static', filename='js/main.js')}}"></script>
+</body>
+</html>
